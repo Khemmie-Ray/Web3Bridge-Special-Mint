@@ -5,6 +5,7 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 import webImg from '../assets/web3.svg'
 import NFTData from "../components/NFTData";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const { width, height } = useWindowSize();
@@ -32,6 +33,7 @@ const Home = () => {
         </div>
         </div>
      </section>
+     <Footer />
     </div>
   );
 };
