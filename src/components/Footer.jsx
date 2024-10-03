@@ -8,7 +8,7 @@ import { FaTelegram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-deepBlue w-[90%] mx-auto p-6 rounded-lg flex items-start justify-between my-10 text-white lg:flex-row md:flex-row flex-col">
+    <footer className="bg-deepBlue w-[90%] mx-auto py-6 lg:px-12 md:px-8 px-6 rounded-lg flex items-start justify-between my-10 text-white lg:flex-row md:flex-row flex-col">
       <div className="lg:w-2/6 md:w-2/6 w-[100%] mb-6">
         <img src={logo} alt=""  />
         <p className="my-6">
@@ -25,7 +25,7 @@ const Footer = () => {
         <p className="mt-4 hidden lg:block md:block">&copy; All Rights Reserved Web3Bridge</p>
       </div>
       <div className="flex lg:w-2/6 md:w-3/6 w-[100%] justify-between lg:flex-row md:flex-row flex-col">
-      <div className="flex flex-col lg:w-1/2 md:w-1/2 w-[100%] mb-6 text-[16px]">
+      <div className="flex flex-col lg:w-1/2 md:w-1/2 w-[100%] mb-6 text-[16px] lg:items-end">
         <p className="text-[18px] font-[600] text-red mb-4">Web3Bridge</p>
         <a href="https://www.web3bridgeafrica.com/" target="_blank" className="mb-4">
           Home
@@ -37,7 +37,7 @@ const Footer = () => {
           Career
         </a>       
       </div>
-      <div className="flex flex-col lg:w-1/2 md:w-1/2 w-[100%] text-[16px]">
+      <div className="flex flex-col lg:w-1/2 md:w-1/2 w-[100%] text-[16px] lg:items-end">
         <p className="text-[18px] font-[600] text-red mb-4">Education</p>
         <a href="https://www.web3bridgeafrica.com/cohorts" target="_blank" className="mb-4">
           Cohort

@@ -6,11 +6,16 @@ import Confetti from "react-confetti";
 import webImg from '../assets/web3.svg'
 import NFTData from "../components/NFTData";
 import Footer from "../components/Footer";
+import { Navigate } from "react-router-dom";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
+import useOwnerAddress from "../Hooks/useOwnerAddress";
 
 const Home = () => {
   const { width, height } = useWindowSize();
+  const { address, isConnected } = useWeb3ModalAccount()
+  const ownerAddress = useOwnerAddress()
 
-  return (
+  return isConnected  && ownerAddress === address ? <Navigate to={'/dashboard'} /> : (
     <div>
       <div>
         <Confetti width={width} height={height} />

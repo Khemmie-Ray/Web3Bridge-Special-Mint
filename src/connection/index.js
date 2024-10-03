@@ -1,28 +1,31 @@
-import { createAppKit } from '@reown/appkit/react'
-import { EthersAdapter } from '@reown/appkit-adapter-ethers'
-import { baseSepolia } from '@reown/appkit/networks';
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
 
-const projectId = import.meta.env.VITE_PROJECT_ID;
+const SUPPORTED_CHAIN = 84532;
 
-const networks = [baseSepolia];
+export const isSupportedChain = (chainId) =>
+  Number(chainId) === SUPPORTED_CHAIN;
+
+const baseSepolia = {
+  chainId: 84532,
+  name: 'basesepolia',
+  currency: 'ETH',
+  explorerUrl: 'https://sepolia.basescan.org/',
+  rpcUrl: import.meta.env.VITE_ALCHEMY_RPC,
+}
 
 const metadata = {
   name: 'My Website',
   description: 'My Website description',
-  url: 'https://mywebsite.com',
-  icons: ['https://avatars.mywebsite.com/']
+  url: 'https://localhost:5173',
+  icons: ['https://localhost:5173']
 }
 
-export const configWallet = () =>  createAppKit({
-  adapters: [new EthersAdapter()],
-  networks,
-  metadata,
-  projectId,
-  features: {
-    analytics: true 
-  },
+export const configWeb3Modal = () => createWeb3Modal({
+  ethersConfig: defaultConfig({ metadata }),
+  chains: [baseSepolia],
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  enableAnalytics: false,
   themeVariables: {
     '--w3m-accent': '#F90101',
-    '--w3m-border-radius-master': '20',
   }
 })
