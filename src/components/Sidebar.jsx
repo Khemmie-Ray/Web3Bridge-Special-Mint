@@ -19,7 +19,6 @@ const Sidebar = () =>  {
     <div className='bg-deepBlue w-[20%] text-white p-8 py-12 h-[100vh] hidden lg:flex md:flex flex-col'>
       <img src={logo} alt='logo'className="mb-20" />
       <NavLink to="/dashboard" className="text-[14px] flex items-center py-4 mb-4 px-6" style={({isActive}) => isActive ? activeStyle : null } end><CgHomeAlt className="mr-4" />Dashboard</NavLink>
-      <NavLink to="transactions" className="text-[14px] flex items-center py-4 mb-4 px-6" style={({isActive}) => isActive ? activeStyle : null }><BsReceipt className="mr-4" /> Transactions</NavLink>
       <button className="text-[14px] mt-auto flex items-center py-4 mb-4 px-6" onClick={() => disconnect()}><TbSettings className="mr-4"  /> Log out</button>
     </div>
   );

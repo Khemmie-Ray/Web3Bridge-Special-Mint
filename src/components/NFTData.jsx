@@ -1,44 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { getNFTContract } from '../constants/contract'
-import { getProvider } from '../constants/providers'
-import { isSupportedChain } from '../connection'
-import {
-  useWeb3ModalAccount,
-  useWeb3ModalProvider,
-} from "@web3modal/ethers/react";
+import useFetchNftData from '../Hooks/useFetchNftData';
 import ClaimReward from './ClaimReward';
+import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 
 const NFTData = () => {
-  const { chainId, address, isConnected } = useWeb3ModalAccount();
-  const { walletProvider } = useWeb3ModalProvider()
-  const [minted, setMinted] = useState(0)
-  const [totalNFT, setTotalNFT] = useState(0)
-
-  async function handleFetchData() {
-    if (!isSupportedChain(chainId)) return console.error("Wrong network");
-    const readWriteProvider = getProvider(walletProvider);
-    const signer = await readWriteProvider.getSigner();
-
-    const contract = getNFTContract(signer);
-
-    try {
-      const transaction = await contract.totalMints(address);
-      setMinted(transaction)
-      const tx = await contract.totalNft();
-      setTotalNFT(tx)
-
-    } catch (error) {
-      console.error(error);
-    } 
-  };
-
-  useEffect(() => {
-    if (isConnected && chainId && walletProvider) {
-      handleFetchData();
-    }
-  }, [isConnected, chainId, walletProvider]);
-
-  console.log("hello", minted, totalNFT)
+  const { isConnected } = useWeb3ModalAccount()
+  const { minted, totalNFT } = useFetchNftData();
 
   return (
     <div className="my-14">
