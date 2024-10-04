@@ -1,6 +1,5 @@
 import { CgHomeAlt } from "react-icons/cg";
 import { TbSettings } from "react-icons/tb";
-import { BsReceipt } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg"
 import { useDisconnect } from "@web3modal/ethers/react";

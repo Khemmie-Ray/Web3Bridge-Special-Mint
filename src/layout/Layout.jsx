@@ -5,9 +5,10 @@ import {
   useWeb3ModalAccount,
 } from "@web3modal/ethers/react";
 import useOwnerAddress from '../Hooks/useOwnerAddress';
+import MobileNav from '../components/MobileNav';
 
 const Layout = () => {
-  const { chainId, address, isConnected } = useWeb3ModalAccount();
+  const { address, isConnected } = useWeb3ModalAccount();
   const ownerAddress = useOwnerAddress()
 
   return !isConnected  && ownerAddress !== address ? (
@@ -16,6 +17,7 @@ const Layout = () => {
     <div className='flex justify-between'>
         <Sidebar />
         <div className='h-[100vh] overflow-y-scroll w-[100%] lg:w-[80%]'>
+          <MobileNav />
         <Outlet />
         </div>
     </div>

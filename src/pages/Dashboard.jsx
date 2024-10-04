@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import SetMint from '../components/SetMint'
-import { useWeb3ModalAccount } from '@web3modal/ethers/react';
+import SetNft from '../components/SetNft';
 import useFetchNftData from '../Hooks/useFetchNftData';
 
 const Dashboard = () => {
   const [greeting, setGreeting] = useState('');
-  const { isConnected } = useWeb3ModalAccount()
   const { minted, totalNFT } = useFetchNftData();
 
   useEffect(() => {
@@ -27,7 +26,9 @@ const Dashboard = () => {
         <div>
           <h2 className='lg:text-[38px] md:text-[28px] text-[22px] font-[600] font-Nunito'>Good {greeting} <span className='text-red'> Admin</span></h2>
         </div>
+        <div className='lg:block md:block hidden'>
         <w3m-button />
+        </div>
       </section>
       <section className='flex justify-between lg:flex-row md:flex-row flex-col'>
       <div className="lg:w-[23%] md:w-[23%] w-[100%] p-8 rounded-lg bg-lightPink flex justify-center items-center shadow-lg flex-col mb-6">
@@ -49,6 +50,7 @@ const Dashboard = () => {
       </section>
       <section>
         <SetMint />
+        <SetNft />
       </section>
     </main>
   )
