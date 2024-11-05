@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import { getAnniversaryContract } from '../constants/contract';
-import { getProvider } from '../constants/providers';
-import { isSupportedChain } from '../connection';
+import React, { useState } from "react";
+import { getAnniversaryContract } from "../constants/contract";
+import { getProvider } from "../constants/providers";
+import { isSupportedChain } from "../connection";
 import {
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { FaCircleInfo } from "react-icons/fa6";
+import { ErrorDecoder } from 'ethers-decode-error'
+import abi from '../constants/abi.json'
 
 const SpecialMint = () => {
   const { chainId, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
   const [isOpen, setIsOpen] = useState(false);
+  const errorDecoder = ErrorDecoder.create([abi])
 
   async function handleSpecialMint() {
     if (!isSupportedChain(chainId)) return console.error("Wrong network");
@@ -21,9 +25,8 @@ const SpecialMint = () => {
 
     const contract = getAnniversaryContract(signer);
 
-    try {  
+    try {
       const transaction = await contract.specialMint();
-      console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
 
       if (receipt.status) {
@@ -35,13 +38,16 @@ const SpecialMint = () => {
           position: "top-center",
         });
       }
-    } catch (error) {
-      console.error(error);
-      toast.error("Mint failed!", {
+    } catch (err) {
+      const decodedError = await errorDecoder.decode(err)
+      console.error(err);
+      toast.error(`Mint failed! - ${decodedError.reason}`, {
         position: "top-center",
       });
+    } finally {
+      setIsOpen(false)
     }
-  };
+  }
 
   const handleConnection = () => {
     if (!isConnected) {
@@ -57,20 +63,27 @@ const SpecialMint = () => {
     <div>
       <button
         className="btn bg-red py-4 px-6 rounded-lg lg:w-[50%] md:w-[50%] w-[100%] border-none hover:bg-lightPink hover:text-deepBlue"
-        onClick={handleConnection}
+        onClick={() => setIsOpen(true)}
       >
         Special Mint
       </button>
-      {/* {isOpen && (
+      {isOpen && (
         <dialog id="my_modal_1" className="modal modal-open">
           <div
-            className="modal-box bg-deepBlue text-white rounded-lg"
-            style={{ backgroundColor: '#003366' }} // Add solid deep blue background here
+            className="modal-box bg-deepBlue text-white rounded-lg text-center"
           >
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">Press ESC key or click the button below to close</p>
+            <h3 className="font-[600] font-Nunito text-[20px] text-red flex items-center justify-center mt-4"><FaCircleInfo className="text-2xl mr-4"/> Eligibility Notice!</h3>
+            <p className="py-4">
+            You are eligible to mint this NFT only if you have consistently minted our monthly newsletter NFTs.
+            </p>
             <div className="modal-action">
-              <button className="btn" onClick={() => setIsOpen(false)}>Close</button>
+
+              <button
+                className="btn bg-red py-4 px-6 rounded-lg w-[100%] border-none hover:bg-lightPink hover:text-deepBlue"
+                onClick={handleConnection}
+              >
+                Mint NFT
+              </button>
             </div>
           </div>
           <form
@@ -79,7 +92,7 @@ const SpecialMint = () => {
             onClick={() => setIsOpen(false)}
           ></form>
         </dialog>
-      )} */}
+      )}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getNFTContract } from '../constants/contract';
+// import { getNFTContract } from '../constants/contract';
+import { getAnniversaryContract, getNFTContract } from '../constants/contract';
 import { getProvider } from '../constants/providers';
 import { isSupportedChain } from '../connection';
 import { useWeb3ModalAccount, useWeb3ModalProvider } from "@web3modal/ethers/react";
@@ -10,6 +11,8 @@ const useFetchNftData = () => {
   
   const [minted, setMinted] = useState(0);
   const [totalNFT, setTotalNFT] = useState(0);
+  const [newsTotal, setNewsTotal] = useState(0);
+  const [userMint, setUserMint] = useState(0);
 
   const handleFetchData = async () => {
     if (!isSupportedChain(chainId)) {
@@ -19,7 +22,8 @@ const useFetchNftData = () => {
 
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
-    const contract = getNFTContract(signer);
+    const contract = getAnniversaryContract(signer);
+    const nftContract = getNFTContract(signer)
 
     try {
       const mintedTx = await contract.totalMints(address);
@@ -27,6 +31,12 @@ const useFetchNftData = () => {
 
       const totalNftTx = await contract.totalNft();
       setTotalNFT(totalNftTx);
+
+      const newsletterTx = await nftContract.totalNft();
+      setNewsTotal(newsletterTx)
+
+      const newsMintTx = await nftContract.totalMints(address);
+      setUserMint(newsMintTx)
 
     } catch (error) {
       console.error(error);
@@ -39,7 +49,7 @@ const useFetchNftData = () => {
     }
   }, [isConnected, chainId, walletProvider]);
 
-  return { minted, totalNFT};  
+  return { minted, totalNFT, newsTotal, userMint};  
 };
 
 export default useFetchNftData;

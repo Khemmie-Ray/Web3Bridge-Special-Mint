@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 
 // read only provider pointing to mumbai. It allows read only access to the mumbai blockchain
 export const readOnlyProvider = new ethers.JsonRpcProvider(
-    import.meta.env.VITE_ALCHEMY_RPC 
+    import.meta.env.VITE_INFURA_RPC 
 );
 
 export const wssProvider = new ethers.WebSocketProvider(

@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import { Navigate } from "react-router-dom";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import useOwnerAddress from "../Hooks/useOwnerAddress";
+import useMintStatus from "../Hooks/useMintStatus";
 
 const Home = () => {
   const { width, height } = useWindowSize();
@@ -29,9 +30,9 @@ const Home = () => {
             <h2 className='font-Nunito lg:text-[48px] md:text-[38px] text-[28px] font-[600] mb-6 self-center'>
             The <span className='text-red'>journey</span>, so far</h2>
             <p>It’s been a remarkable journey—from our humble beginnings to becoming a key player in the Web3 space, driving innovation and education across the ecosystem. As we reflect on our achievements, we want to honor those who have supported us every step of the way.</p>
-            <p className="my-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet illum perspiciatis hic ad excepturi aliquam minus dolores sint, alias veritatis odit eius fugit vel ab.</p>
-            <p className="my-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo sit debitis commodi optio ratione dolore odit repudiandae vel suscipit harum tempore ducimus officia beatae, dolores numquam aut tempora, at natus! Voluptatem debitis non quaerat tempore. Hic, dolor temporibus? Vero, at.</p>
-            <p className="my-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum dolorum, non molestias dolore praesentium illum fugiat perspiciatis iure id alias rerum itaque atque repellendus totam, error cum corrupti quam quae assumenda nam incidunt. Minus architecto, ad consectetur sapiente dolorum aut?</p>
+            <p className="my-6">Through our dedication to fostering talent, we have empowered a generation of African Web3 developers, creating pathways for growth and success in decentralized technology. </p>
+            <p className="my-6">Our journey has been marked by thousands of skilled individuals trained, partnerships formed, and a network that now spans the continent, all built on a foundation of resilience and shared vision.</p>
+            <p className="my-6">This anniversary is more than a milestone; it’s a celebration of our community. In gratitude to our loyal supporters—especially our newsletter subscribers who have been with us on this journey—we’re excited to recognize and reward those who have contributed to our mission. Together, we look forward to a future filled with new possibilities, broader horizons, and an even greater impact across Africa’s Web3 landscape..</p>
         </div>
         <div className="lg:w-[48%] md:w-[48%] w-[100%] order-1 lg:order-2 md:order-2 mb-6">
             <img src={webImg} alt="" />

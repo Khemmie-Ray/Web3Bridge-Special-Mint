@@ -124,6 +124,7 @@ const SetNft = () => {
             </label>
             <input
               type="text"
+              value={nftId}
               onChange={(e) => setNftId(e.target.value)}
               className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight"
               placeholder="Enter NFT ID"
@@ -166,6 +167,7 @@ const SetNft = () => {
           </label>
           <input
             type="text"
+            value={prize}
             onChange={(e) => setPrize(e.target.value)}
             className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight"
             placeholder="Enter Prize"
